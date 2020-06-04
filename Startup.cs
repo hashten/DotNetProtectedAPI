@@ -29,13 +29,16 @@ namespace DotNetProtectedAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Adds Microsoft Identity platform (AAD v2.0) support to protect this Api
+            // Adds Microsoft Identity platform (AAD v2.0) support to protect this Api.
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    // Adds token validation
                     .AddProtectedWebApi(Configuration, "AzureAd");
+
             // Uncomment the following lines if you want your Web API to call a downstream API
             // services.AddProtectedWebApiCallsProtectedWebApi(Configuration, "AzureAd")
             //         .AddInMemoryTokenCaches();
-
+            services.AddSwaggerDocument();
+            
             services.AddControllers();
         }
 
@@ -46,7 +49,9 @@ namespace DotNetProtectedAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();

@@ -9,7 +9,8 @@ using Microsoft.Extensions.Logging;
 
 namespace DotNetProtectedAPI.Controllers
 {
-    [Authorize]
+    // For role based access use [Authorize(Roles = "appRoleValue")] This attribute can be added to classes or to methods.
+    [Authorize] 
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -22,7 +23,7 @@ namespace DotNetProtectedAPI.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
 
         // The Web API will only accept tokens 1) for users, and 2) having the access_as_user scope for this API
-        static readonly string[] scopeRequiredByApi = new string[] { "access_as_user" };
+        static readonly string[] scopeRequiredByApi = new string[] { "WeatherForecast.Read" };
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
@@ -33,7 +34,7 @@ namespace DotNetProtectedAPI.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             HttpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
-
+            
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
