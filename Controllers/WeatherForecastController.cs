@@ -9,8 +9,10 @@ using Microsoft.Extensions.Logging;
 
 namespace DotNetProtectedAPI.Controllers
 {
-    // For role based access use [Authorize(Roles = "appRoleValue")] This attribute can be added to classes or to methods.
-    [Authorize] 
+    // For role based access use [Authorize(Roles = "appRoleValue")] This attribute can be added to classes or to methods, 
+    // I have experienced bugs with blank spaces around the authorize attribute causing the app to crash when user does not have role.
+    // Fix it by adding/removing blankspaces around the attribute.
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
