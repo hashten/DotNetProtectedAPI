@@ -31,12 +31,11 @@ namespace DotNetProtectedAPI
         {
             // Adds Microsoft Identity platform (AAD v2.0) support to protect this Api.
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    // Adds token validation
-                    .AddProtectedWebApi(Configuration, "AzureAd");
-
+                    .AddMicrosoftWebApi(Configuration);
             // Uncomment the following lines if you want your Web API to call a downstream API
-            // services.AddProtectedWebApiCallsProtectedWebApi(Configuration, "AzureAd")
-            //         .AddInMemoryTokenCaches();
+            //      .AddMicrosoftWebApiCallsWebApi(Configuration)
+            //      .AddInMemoryTokenCaches();
+            
             services.AddSwaggerDocument();
             
             services.AddControllers();
