@@ -30,11 +30,7 @@ namespace DotNetProtectedAPI
         public void ConfigureServices(IServiceCollection services)
         {
             // Adds Microsoft Identity platform (AAD v2.0) support to protect this Api.
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddMicrosoftWebApi(Configuration);
-            // Uncomment the following lines if you want your Web API to call a downstream API
-            //      .AddMicrosoftWebApiCallsWebApi(Configuration)
-            //      .AddInMemoryTokenCaches();
+            services.AddMicrosoftIdentityWebApiAuthentication(Configuration);
             
             services.AddSwaggerDocument();
             

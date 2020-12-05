@@ -35,6 +35,8 @@ namespace DotNetProtectedAPI.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             HttpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
+            // Uncomment and fill accepted roles if you use it
+            // HttpContext.ValidateAppRole(new string[] {}); 
             
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
